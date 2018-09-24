@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="GBK"?>
+<bean-mappings xmlns="https://github.com/alibaba/tamper/schema/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://github.com/alibaba/tamper/schema/mapping https://raw.github.com/alibaba/tamper/master/src/main/resources/META-INF/mapping.xsd">
+    
+    <global-configurations debug="true"/>
+	<!--此处映射包含多个特殊场景的映射 包含以下内容-->
+	<!--简单的 字段          映射-->
+	<!--简单的 日期转字符串    映射-->
+	<!--简单的 字符串转日期    映射-->
+	<!--简单的 子模型  映射-->
+	<!--简单的 子模型 集合 映射-->
+	<!--简单的 子模型 集合 转 子模型 映射  未实现  官网未发现 明确实例-->
+	<!--  (bean-bean) mapping 测试 -->
+	<bean-mapping batch="true" srcClass="com.example.tamper.bean.simple.Src"
+				  targetClass="com.example.tamper.bean.simple.Tar"
+				  reversable="true">
+		<!--字段映射-->
+		<field-mapping srcName="name" targetName="tarName" />
+		<!--字符串 转 日期-->
+		<field-mapping srcName="strDate" srcClass="string"
+					   targetName="tarStrDate" targetClass="java.util.Date" convertor="StringToDateTime" />
+		<!--日期 转 字符串-->
+		<field-mapping srcName="date" srcClass="java.util.Date"
+					   targetName="tarDate" targetClass="string" convertor="DateTimeToString" />
+		<!--子模型 映射-->
+		<field-mapping srcName="componentSrc"
+					   targetName="componentTar" mapping="true"/>
+		<!--子模型 集合 映射-->
+		<field-mapping srcName="componentSrcList" srcComponentClass="com.example.tamper.bean.simple.ComponentSrc"
+					   targetName="componentTarList" targetComponentClass="com.example.tamper.bean.simple.ComponentTar"/>
+		<!--子模型 集合 转 子模型  尝试未实现   官网没有 明确的实例-->
+		<!--<field-mapping-->
+					   <!--targetName="componentTar1"-->
+					   <!--script="src.componentSrcList1[0]"/>-->
+	</bean-mapping>
+	<!--子模型 之间的 映射-->
+	<bean-mapping srcClass="com.example.tamper.bean.simple.ComponentSrc"
+				  targetClass="com.example.tamper.bean.simple.ComponentTar">
+		<field-mapping srcName="name" targetName="tarName"/>
+		<field-mapping srcName="password" targetName="tarPassword"/>
+	</bean-mapping>
+	<bean-mapping srcClass="com.example.tamper.bean.simple.Src" targetClass="com.example.tamper.bean.simple.ComponentTar">
+		<field-mapping targetName="tarName" script="src.componentSrcList1[0].name"/>
+		<field-mapping targetName="tarPassword" script="src.componentSrcList1[0].password"/>
+	</bean-mapping>
+</bean-mappings>
