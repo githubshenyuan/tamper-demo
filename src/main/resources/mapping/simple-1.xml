@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="GBK"?>
+<bean-mappings xmlns="https://github.com/alibaba/tamper/schema/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			   xsi:schemaLocation="https://github.com/alibaba/tamper/schema/mapping https://raw.github.com/alibaba/tamper/master/src/main/resources/META-INF/mapping.xsd">
+
+	<global-configurations debug="true"/>
+
+	<bean-mapping srcClass="com.example.tamper.bean.UserSrc" targetClass="com.example.tamper.bean.UserTar">
+		<field-mapping srcName="srcUuid" targetName="tarUuid" defaultValue="uuid-1"/>
+		<field-mapping srcName="srcUserName" targetName="tarUserName" defaultValue="username-1"/>
+		<field-mapping srcName="srcPass" targetName="tarPass" defaultValue="pass-1s"/>
+	</bean-mapping>
+</bean-mappings>
