@@ -13,6 +13,7 @@ import com.example.tamper.bean.simple.Tar;
 import junit.framework.TestCase;
 import org.junit.Test;
 
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,7 +26,11 @@ import java.util.List;
 public class TamperDemoTest extends TestCase {
 
     @Test
-    public void testOfficial() {
+    public void testOfficial() throws NoSuchFieldException, IllegalAccessException {
+        Field field = Src.class.getField("name");
+        Src src = new Src();
+        src.setName("xiaoming");
+        System.out.println(field.get(src));
         BeanMapping srcMapping    = null;
         BeanMapping targetMapping = null;
         BeanMappingConfigHelper.getInstance().registerConfig("mapping/mapping-official.xml");

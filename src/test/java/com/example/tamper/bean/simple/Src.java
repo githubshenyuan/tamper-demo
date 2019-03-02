@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Src {
 
-    private String name;
+    public String name;
     private String strDate;
     private Date date;
     private ComponentSrc componentSrc;

@@ -11,11 +11,11 @@
 	<!--简单的 子模型 集合 映射-->
 	<!--简单的 子模型 集合 转 子模型 映射  未实现  官网未发现 明确实例-->
 	<!--  (bean-bean) mapping 测试 -->
-	<bean-mapping batch="true" srcClass="com.example.tamper.bean.simple.Src"
+	<bean-mapping  batch="true" srcClass="com.example.tamper.bean.simple.Src"
 				  targetClass="com.example.tamper.bean.simple.Tar"
 				  reversable="true">
 		<!--字段映射-->
-		<field-mapping srcName="name" targetName="tarName" />
+		<field-mapping srcName="name" targetName="tarName"  />
 		<!--字符串 转 日期-->
 		<field-mapping srcName="strDate" srcClass="string"
 					   targetName="tarStrDate" targetClass="java.util.Date" convertor="StringToDateTime" />
